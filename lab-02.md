@@ -29,7 +29,7 @@ plastic_waste <- plastic_waste %>%
 ggplot(plastic_waste, aes(x = plastic_waste_per_cap)) +
   geom_histogram(binwidth = 0.2) +
   facet_wrap(~ continent) +
-  labs(title = 'quantité de déchet par habitant')
+  labs(title = 'Quantité de déchets par habitant', x = 'Déchets par habitant', y = 'Nombre de pays')
 ```
 
 ![](lab-02_files/figure-gfm/plastic-waste-continent-1.png)<!-- -->
@@ -40,7 +40,8 @@ ggplot(plastic_waste, aes(x = plastic_waste_per_cap)) +
 ggplot(plastic_waste, aes(x = plastic_waste_per_cap,
                           fill = continent, color = continent)) + 
   geom_density(adjust = 1,
-               alpha = 0.4)
+               alpha = 0.4) +
+  labs(title = 'Distribution des déchets par habitant', x = 'Déchets par habitant', y = 'Densité')
 ```
 
 ![](lab-02_files/figure-gfm/plastic-waste-density-1.png)<!-- -->
@@ -56,7 +57,8 @@ Boxplot:
 
 ``` r
 ggplot(plastic_waste, aes(x = continent, y = plastic_waste_per_cap)) +
-  geom_boxplot()
+  geom_boxplot() +
+  labs(title = 'Répartition des déchets par habitant selon le continent', y = 'Déchets par habitant', x = 'Continent')
 ```
 
 ![](lab-02_files/figure-gfm/plastic-waste-boxplot-1.png)<!-- -->
@@ -65,7 +67,8 @@ Violin plot:
 
 ``` r
 ggplot(plastic_waste, aes(x = continent, y = plastic_waste_per_cap)) +
-  geom_violin()
+  geom_violin() +
+   labs(title = 'Distribution des déchets par habitant selon le continent', y = 'Déchets par habitant', x = 'Continent')
 ```
 
 ![](lab-02_files/figure-gfm/plastic-waste-violin-1.png)<!-- -->
@@ -79,7 +82,8 @@ visuel.
 
 ``` r
 ggplot(plastic_waste, aes(x = plastic_waste_per_cap, y = mismanaged_plastic_waste_per_cap, color = continent)) +
-  geom_point()
+  geom_point() +
+  labs(title = 'Déchets produits vs déchets non gérés par pays', x = 'Déchets par habitant', y = 'Déchets mal gérés par habitant', color = 'Continent')
 ```
 
 ![](lab-02_files/figure-gfm/plastic-waste-mismanaged-1.png)<!-- -->
@@ -97,7 +101,8 @@ l’amérique et l’europe les gère bien.
 
 ``` r
 ggplot(plastic_waste, aes(x = plastic_waste_per_cap, y = total_pop, color = continent)) +
-  geom_point()
+  geom_point() +
+  labs(title = 'Déchets plastiques par habitant en fonction de la population totale', x = 'Déchets par habitant', y = 'Population total', color = 'Continent')
 ```
 
     ## Warning: Removed 10 rows containing missing values or values outside the scale range
@@ -107,7 +112,8 @@ ggplot(plastic_waste, aes(x = plastic_waste_per_cap, y = total_pop, color = cont
 
 ``` r
 ggplot(plastic_waste, aes(x = plastic_waste_per_cap, y = coastal_pop, color = continent)) +
-  geom_point()
+  geom_point() +
+   labs(title = 'Déchets plastiques par habitant en fonction de la population côtière', x = 'Déchets par habitant', y = 'Population côtière', color = 'Continent')
 ```
 
 ![](lab-02_files/figure-gfm/plastic-waste-population-coastal-1.png)<!-- -->
@@ -125,7 +131,7 @@ plastic_waste_coastal <- plastic_waste %>%
 ggplot(plastic_waste_coastal, aes(y = plastic_waste_per_cap, x = coastal_pop_prop, color = continent)) +
   geom_point() +
   geom_smooth(method = 'loess', color = 'black', fill = 'grey', se = TRUE) +
-  labs(title = 'Quantité de déchets plastiques vs Porportion de la population côtière', subtitle = 'Selon le continent', x = 'Porportion de la population côtière (Coastal/total population)', y = 'Nombre de déchets plastiques par habitant')
+  labs(title = 'Quantité de déchets plastiques vs Porportion de la population côtière', subtitle = 'Selon le continent', x = 'Porportion de la population côtière (Coastal / total population)', y = 'Nombre de déchets plastiques par habitant', color = 'Continent')
 ```
 
     ## `geom_smooth()` using formula = 'y ~ x'
@@ -137,3 +143,10 @@ ggplot(plastic_waste_coastal, aes(y = plastic_waste_per_cap, x = coastal_pop_pro
     ## (`geom_point()`).
 
 ![](lab-02_files/figure-gfm/recreate-viz-1.png)<!-- -->
+
+Un pays avec une population côtière plus importante produit légèrement
+plus de déchets plastiques par habitant. Comme la population côtière est
+généralement plus faible que la non côtière, la majorité des points se
+concentrent au début du graphique (x \< 1). Mais la tendance reste
+faible, l’augmentation des déchets est légère. Les vraies différences
+viennent surtout des continents(richesse) et de la gestion des déchets.
